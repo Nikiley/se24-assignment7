@@ -234,14 +234,34 @@ class DoublyLinkedListTest {
         Assertions.assertEquals("0.9<->0.5<->0.4", list.toString());
     }
 
-    /**
-     * Helper method to test begin and end pointers of a doubly linked list
-     * @param list List to test
-     */
-    private static void testBeginEndPointers(DoublyLinkedList list) {
-        Assertions.assertNull(list.getStart().getPrev());
-        Assertions.assertSame(list.getStart().getNext().getPrev(), list.getStart());
-        Assertions.assertNull(list.getEnd().getNext());
-        Assertions.assertSame(list.getEnd().getPrev().getNext(), list.getEnd());
+    @Test
+    void testInsertIntoEmptyList() {
+        // given: an empty list
+        Assertions.assertTrue(list.isEmpty());
+        // when: inserting a new element
+        list.insert(new DoublyLinkedList.Element(0.9));
+        // then: the list contains exactly that element
+        Assertions.assertArrayEquals(new double[]{0.9}, list.asArray());
     }
+
+    @Test
+    void testInsertByValue() {
+        // given: an empty list
+        Assertions.assertTrue(list.isEmpty());
+        // when: inserting a new value
+        list.insert(0.9);
+        // then: the list contains exactly that element
+        Assertions.assertArrayEquals(new double[]{0.9}, list.asArray());
+    }
+        /**
+         * Helper method to test begin and end pointers of a doubly linked list
+         * @param list List to test
+         */
+        private static void testBeginEndPointers(DoublyLinkedList list) {
+            Assertions.assertNull(list.getStart().getPrev());
+            Assertions.assertSame(list.getStart().getNext().getPrev(), list.getStart());
+            Assertions.assertNull(list.getEnd().getNext());
+            Assertions.assertSame(list.getEnd().getPrev().getNext(), list.getEnd());
+        }
 }
+
